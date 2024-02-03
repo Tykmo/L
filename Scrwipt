@@ -1,0 +1,112 @@
+
+local Window = OrionLib:MakeWindow({Name = "hubs n scripts", HidePremium = false, SaveConfig = true, introtext = "loading", ConfigFolder = "hubs n studs"})
+
+local Tab = Window:MakeTab({
+	Name = "home",
+	Icon = "rbxassetid://16207214733",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "stop hub",
+	Callback = function()
+      		OrionLib:destroy()
+  	end    
+})
+
+Tab:AddSlider({
+	Name = "Walkspeed",
+	Min = 16,
+	Max = 1000,
+	Default = 16,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Speed",
+	Callback = function(s)
+game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
+	end    
+})
+
+Tab:AddSlider({
+	Name = "jump power",
+	Min = 16,
+	Max = 1000,
+	Default = 5,
+	Color = Color3.fromRGB(255,255,255),
+	Increment = 1,
+	ValueName = "Speed",
+	Callback = function(s)
+game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
+	end    
+})
+
+
+local Tab = Window:MakeTab({
+	Name = "hubs",
+	Icon = "rbxassetid://16207110677",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "astral hub",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/Vcsk/AstralHub/main/Main.lua", true))()
+  	end
+
+Tab:AddButton({
+	Name = "vexhub",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/V31nc/On-Discord/Created/VexHub"))()
+  	end
+
+local Tab = Window:MakeTab({
+	Name = "scripts",
+	Icon = "rbxassetid://16207172606",
+	PremiumOnly = false
+})
+
+Tab:AddButton({
+	Name = "tool giver",
+	Callback = function()
+      		loadstring(game:HttpGet(('https://pastefy.app/VYIAk3o1/raw'),true))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "free emotes",
+	Callback = function()
+      		loadstring(game:HttpGet("https://scriptblox.com/raw/Brookhaven-RP-all-emotes-6849"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "bypass chat",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/BakaPraselol/MRCBV4LSB4KRS/main/Loader"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "rizz",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/mikhailramlal/Rizzer/main/main"))()
+  	end    
+})
+
+Tab:AddButton({
+	Name = "troll chat",
+	Callback = function()
+      		loadstring(game:HttpGet("https://raw.githubusercontent.com/game-hax/uca/main/release/uca.min.lua"))()
+  	end    
+})
+
+local httpHook;
+httpHook = hookfunction(game.HttpGet, function(self,...)
+   local Args = {...}
+   if Args[1] and type(Args[1]) == "string" then
+       if Args[1]:match("checkPremium.php") then
+           return "true"
+       end
+   end
+   return httpHook(self,...)
+end
