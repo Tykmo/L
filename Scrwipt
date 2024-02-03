@@ -1,112 +1,93 @@
+local Library = loadstring(game:HttpGet("https://pastebin.com/raw/vff1bQ9F"))()
 
-local Window = OrionLib:MakeWindow({Name = "hubs n scripts", HidePremium = false, SaveConfig = true, introtext = "loading", ConfigFolder = "hubs n studs"})
-
-local Tab = Window:MakeTab({
-	Name = "home",
-	Icon = "rbxassetid://16207214733",
-	PremiumOnly = false
-})
-
-Tab:AddButton({
-	Name = "stop hub",
-	Callback = function()
-      		OrionLib:destroy()
-  	end    
-})
-
-Tab:AddSlider({
-	Name = "Walkspeed",
-	Min = 16,
-	Max = 1000,
-	Default = 16,
-	Color = Color3.fromRGB(255,255,255),
-	Increment = 1,
-	ValueName = "Speed",
-	Callback = function(s)
-game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = value
-	end    
-})
-
-Tab:AddSlider({
-	Name = "jump power",
-	Min = 16,
-	Max = 1000,
-	Default = 5,
-	Color = Color3.fromRGB(255,255,255),
-	Increment = 1,
-	ValueName = "Speed",
-	Callback = function(s)
-game.Players.LocalPlayer.Character.Humanoid.JumpPower = value
-	end    
-})
+local Window = Library.CreateLib("hubs n scripts", "Sentinel")
 
 
-local Tab = Window:MakeTab({
-	Name = "hubs",
-	Icon = "rbxassetid://16207110677",
-	PremiumOnly = false
-})
+--home
+local homeTab = Window:NewTab("home")
+local homeSection = homeTab:newSection("player")
 
-Tab:AddButton({
-	Name = "astral hub",
-	Callback = function()
-      		loadstring(game:HttpGet("https://raw.githubusercontent.com/Vcsk/AstralHub/main/Main.lua", true))()
-  	end
+homeSection:NewSlider("walkspeed", "increases and decreases your walk speed", 1000, 0, function(s) -- 1000 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+end)
 
-Tab:AddButton({
-	Name = "vexhub",
-	Callback = function()
-      		loadstring(game:HttpGet("https://raw.githubusercontent.com/V31nc/On-Discord/Created/VexHub"))()
-  	end
+homeSection:NewSlider("JumpPower", "increases and decreases your jump power", 1000, 0, function(s) -- 1000 (MaxValue) | 0 (MinValue)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+end)
 
-local Tab = Window:MakeTab({
-	Name = "scripts",
-	Icon = "rbxassetid://16207172606",
-	PremiumOnly = false
-})
+homeSection:NewButton("reset character", "just resets your character", function()
+    game.Player.LocalPlayer.Character.Head:Destroy()
+end)
 
-Tab:AddButton({
-	Name = "tool giver",
-	Callback = function()
-      		loadstring(game:HttpGet(('https://pastefy.app/VYIAk3o1/raw'),true))()
-  	end    
-})
+Section:NewToggle("gravity", "sets the gravity to 0", function(state)
+    if state then
+        Workspace.Gravity = 0
+    else
+        Workspace.Gravity = 196.2
+    end
+end)
 
-Tab:AddButton({
-	Name = "free emotes",
-	Callback = function()
-      		loadstring(game:HttpGet("https://scriptblox.com/raw/Brookhaven-RP-all-emotes-6849"))()
-  	end    
-})
+--hubs
+local hubsTab = Window:NewTab("hubs")
+local hubsSection = hubsTab:newSection("hubs")
 
-Tab:AddButton({
-	Name = "bypass chat",
-	Callback = function()
-      		loadstring(game:HttpGet("https://raw.githubusercontent.com/BakaPraselol/MRCBV4LSB4KRS/main/Loader"))()
-  	end    
-})
+hubsSection:NewButton("vexhub", "nothing here", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/V31nc/On-Discord/Created/VexHub"))()
+end)
 
-Tab:AddButton({
-	Name = "rizz",
-	Callback = function()
-      		loadstring(game:HttpGet("https://raw.githubusercontent.com/mikhailramlal/Rizzer/main/main"))()
-  	end    
-})
+hubsSection:NewButton("astral hub", "nothing here", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/Vcsk/AstralHub/main/Main.lua", true))()
+end)
 
-Tab:AddButton({
-	Name = "troll chat",
-	Callback = function()
-      		loadstring(game:HttpGet("https://raw.githubusercontent.com/game-hax/uca/main/release/uca.min.lua"))()
-  	end    
-})
+hubsSection:NewButton("shadow hub", "nothing here too", function()
+    loadstring(game:HttpGet('https://github.com/Tykmo/Shadowhub-compressed/blob/main/Shadow%20hub'))()
+end)
 
-local httpHook;
-httpHook = hookfunction(game.HttpGet, function(self,...)
-   local Args = {...}
-   if Args[1] and type(Args[1]) == "string" then
-       if Args[1]:match("checkPremium.php") then
-           return "true"
-       end
-   end
-   return httpHook(self,...)
+
+--scripts
+local scriptsTab = Window:NewTab("scripts")
+local scriptsSection = scriptsTab:newSection("scripts")
+
+scriptsSection:NewButton("infinite yield", "give you a ui to use admin power on games without admin and with admin", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'))()
+end)
+
+scriptsSection:NewButton("rejoin when kicked", "adds a button to rejoin if you get kicked", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/GGH52lan/GGH52lan/main/Rejoin_Button.txt"))()
+end)
+
+scriptsSection:NewButton("fly v3", "lets you fly without any errors", function()
+    loadstring(game:HttpGet('https://raw.githubusercontent.com/Pro69Yes/sussy-Script/main/SecuredFlyGuiv3.lua'))()
+end)
+
+scriptsSection:NewButton("lagswitch", "lets you switch to have lag" , function()
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/0Ben1/fe/main/Protected - 2023-05-28T225112.055.lua.txt'),true))()
+end)
+
+scriptsSection:NewButton("fake chat trolling", "a gui to troll kids and adults", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/game-hax/uca/main/release/uca.min.lua"))()
+end)
+
+scriptsSection:NewButton("tool giver", "give your every tool in roblox", function()
+    loadstring(game:HttpGet(('https://pastefy.app/VYIAk3o1/raw'),true))()
+end)
+
+scriptsSection:NewButton("free emotes", "a gui to use every emote without paying robux", function()
+    loadstring(game:HttpGet("https://scriptblox.com/raw/Brookhaven-RP-all-emotes-6849"))()
+end)
+
+scriptsSection:NewButton("collision", "a gui to make other have collision or not", function()
+    
+end)
+
+homeSection:NewKeybind("toggle gui", "toggles the gui", Enum.KeyCode.k, function()
+	Library:ToggleUI()
+end)
+
+for theme, color in pairs(themes) do
+    Section:NewColorPicker(theme, "Change your "..theme, color, function(color3)
+        Library:ChangeColor(theme, color3)
+    end)
 end
+
+
